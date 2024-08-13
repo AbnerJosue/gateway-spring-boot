@@ -1,0 +1,11 @@
+server:
+  port: 8000
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: product-service-route
+            uri: http://backend:8080
+            predicates:
+              - Path=/api/products/**

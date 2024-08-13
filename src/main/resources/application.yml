@@ -3,9 +3,21 @@ server:
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       mvc:
         routes:
           - id: product-service-route
             uri: http://backend:8080
             predicates:
               - Path=/api/products/**
+            metadata:
+              cors:
+                allowedOrigins: '*'
+                allowedMethods: '*'
+                allowedHeaders: '*'
+                maxAge: 30

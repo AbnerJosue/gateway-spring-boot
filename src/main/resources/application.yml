@@ -3,21 +3,16 @@ server:
 spring:
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+      global-cors:
+        cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:3000"
-            allowedMethods: "*"
-            allowedHeaders: "*"
+            allowed-origins: '*'
+            allowed-methods: '*'
       mvc:
         routes:
           - id: product-service-route
             uri: http://backend:8080
             predicates:
               - Path=/api/products/**
-            metadata:
-              cors:
-                allowedOrigins: '*'
-                allowedMethods: '*'
-                allowedHeaders: '*'
-                maxAge: 30
